@@ -1,0 +1,27 @@
+{
+  "name": "ikt-2004-eksamen",
+  "version": "1.0.0",
+  "description": "Dette er eksamens oppgaven utvikilings for Victor",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GGV7373/IKT-2004-Eksamen.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/GGV7373/IKT-2004-Eksamen/issues"
+  },
+  "homepage": "https://github.com/GGV7373/IKT-2004-Eksamen#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
