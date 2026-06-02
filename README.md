@@ -1,22 +1,46 @@
-# IKT-2004-Eksamen
-Dette er eksamens oppgaven utvikilings for Victor
-
 # Bryllup-easy AS
-Bryllup-easy AS er en bedrift som driver på med brullupsplanlegging. De har en nettbasert tjeneste hvor kunder kan logge inn og velge tjenester for sitt brullup. 
+
+En komplett nettbutikk for bryllupsplanlegging, bygget med Node.js, Express og PostgreSQL.
+
+Eksamensoppgave utviklet av Victor — IKT-2004.
+
+## Om prosjektet
+
+Bryllup-easy AS er en nettbasert tjeneste der kunder kan registrere seg, logge inn, bla gjennom bryllupstjenester og legge inn bestillinger. Nettstedet tilbyr fire kategorier: musikere, blomster, kake og bordkort.
+
+## Funksjoner
+
+- Brukerregistrering og innlogging med krypterte passord
+- Produktkatalog med kategorier (musikere, blomster, kake, bordkort)
+- Handlekurv og bestilling
+- Ordrehistorikk for innloggede brukere
+- Administrasjonspanel for produkter, bestillinger og brukere
+
+## Kom i gang
+
+1. Kopier miljøvariabler: `cp example.env .env`
+2. Start database: `docker compose up -d`
+3. Installer avhengigheter: `npm install`
+4. Start serveren: `npm start`
+5. Åpne [localhost:3000](http://localhost:3000) i nettleseren
 
 ## Admin
-Tilgang til admin med passord er:
 
-Username: admin
-Password: admin123
+Tilgang til admin-panelet på [localhost:3000/admin](http://localhost:3000/admin):
 
-Det er tilgang på localhost:3000/admin
+| Brukernavn | Passord   |
+|------------|-----------|
+| `admin`    | `admin123` |
 
-Oppsett? Se [brukerveiledning.md](docs/brukerveiledning.md)
+Se [brukerveiledning.md](docs/brukerveiledning.md) for mer detaljert oppsett.
 
-## PostgreSQL-oppsett
+## Teknologier
 
-1. Kopier verdiene fra `example.env` til `.env`.
-2. Start databasen med `docker compose up -d`.
-3. Kjor `npm install` og deretter `npm start`.
-4. Apne forsiden og legg inn navn, eller test tilkoblingen pa `/database-status`.
+| Teknologi | Bruk |
+|-----------|------|
+| Node.js + Express 5 | Backend og ruting |
+| PostgreSQL | Database (via Docker) |
+| EJS | HTML-maler |
+| bcrypt | Passordkryptering |
+| express-session | Brukersesjon |
+| multer | Bildeopplasting |

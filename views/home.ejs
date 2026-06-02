@@ -1,9 +1,18 @@
 <%- include('layout/header') %>
 
-<section class="hero">
-  <h1>Planlegg ditt drømmebryllup</h1>
-  <p>Alt du trenger til den store dagen — samlet på ett sted.</p>
+<section class="hero-banner">
+  <div class="hero-overlay">
+    <p class="hero-welcome">Velkommen til</p>
+    <h1 class="hero-title">Bryllup-easy AS</h1>
+    <p class="hero-sub">Alt du trenger til den store dagen — samlet på ett sted.</p>
+    <a href="/products" class="btn-primary hero-cta">Utforsk tjenester</a>
+  </div>
 </section>
+
+<div class="section-heading">
+  <h2>Våre kategorier</h2>
+  <p>Velg blant våre eksklusive bryllupstjenester</p>
+</div>
 
 <section class="categories">
   <% categories.forEach(cat => { %>
@@ -15,6 +24,55 @@
     </div>
   </a>
   <% }) %>
+</section>
+
+<section class="promo-section">
+  <div class="section-heading">
+    <h2>Hvorfor velge oss?</h2>
+    <p>Vi gjør bryllupsdagen din uforglemmelig</p>
+  </div>
+  <div class="promo-grid">
+    <div class="promo-card">
+      <img src="/media/promobilde1.jpg" alt="Profesjonell planlegging">
+      <div class="promo-info">
+        <h3>Profesjonell planlegging</h3>
+        <p>Vi tar hånd om alle detaljene slik at dere kan nyte dagen fullt ut.</p>
+      </div>
+    </div>
+    <div class="promo-card">
+      <img src="/media/promobilde2.jpg" alt="Eksklusiv dekor">
+      <div class="promo-info">
+        <h3>Eksklusiv dekor</h3>
+        <p>Vakre blomster og borddekorasjoner som skaper den perfekte stemningen.</p>
+      </div>
+    </div>
+    <div class="promo-card">
+      <img src="/media/promobilde3.jpg" alt="Uforglemmelige øyeblikk">
+      <div class="promo-info">
+        <h3>Uforglemmelige øyeblikk</h3>
+        <p>Fra musikk til kake — alt på ett sted for din store dag.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust-bar">
+  <div class="trust-item">
+    <span class="trust-number">500+</span>
+    <p>Fornøyde par</p>
+  </div>
+  <div class="trust-item">
+    <span class="trust-number">5 ★</span>
+    <p>Stjerners service</p>
+  </div>
+  <div class="trust-item">
+    <span class="trust-number">4</span>
+    <p>Kategorier</p>
+  </div>
+  <div class="trust-item">
+    <span class="trust-number">1</span>
+    <p>Alt på ett sted</p>
+  </div>
 </section>
 
 <%- include('layout/footer') %>
