@@ -1,0 +1,20 @@
+<%- include('layout/header') %>
+
+<section class="hero">
+  <h1>Planlegg ditt drømmebryllup</h1>
+  <p>Alt du trenger til den store dagen — samlet på ett sted.</p>
+</section>
+
+<section class="categories">
+  <% categories.forEach(cat => { %>
+  <a href="/products?category=<%= cat.key %>" class="category-card">
+    <img src="<%= cat.image %>" alt="<%= cat.label %>">
+    <div class="category-info">
+      <h2><%= cat.label %></h2>
+      <p><%= cat.desc %></p>
+    </div>
+  </a>
+  <% }) %>
+</section>
+
+<%- include('layout/footer') %>

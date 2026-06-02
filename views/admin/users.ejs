@@ -1,0 +1,25 @@
+<%- include('header') %>
+
+<div class="admin-section">
+  <h1>Brukere</h1>
+  <table class="admin-table">
+    <thead>
+      <tr><th>ID</th><th>Navn</th><th>E-post</th><th>Registrert</th></tr>
+    </thead>
+    <tbody>
+      <% users.forEach(u => { %>
+      <tr>
+        <td><%= u.id %></td>
+        <td><%= u.full_name %></td>
+        <td><%= u.email %></td>
+        <td><%= new Date(u.created_at).toLocaleDateString('no-NO') %></td>
+      </tr>
+      <% }) %>
+      <% if (users.length === 0) { %>
+      <tr><td colspan="4">Ingen brukere registrert ennå.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('footer') %>

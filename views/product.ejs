@@ -1,0 +1,39 @@
+<%- include('layout/header') %>
+
+<div class="product-detail">
+  <a href="/products?category=<%= product.category %>" class="back-link">&larr; Tilbake</a>
+
+  <div class="product-detail-inner">
+    <div class="product-image-wrap">
+      <% if (product.image_path) { %>
+        <img src="<%= product.image_path %>" alt="<%= product.name %>">
+      <% } else { %>
+        <div class="no-image-large">Ingen bilde</div>
+      <% } %>
+    </div>
+    <div class="product-detail-info">
+      <h1><%= product.name %></h1>
+      <p class="price-large">kr <%= parseFloat(product.price).toFixed(2) %></p>
+      <% if (product.description) { %><p class="description"><%= product.description %></p><% } %>
+      <p class="stock-info"><%= product.stock > 0 ? `${product.stock} tilgjengelig` : 'Utsolgt' %></p>
+
+      <% if (user) { %>
+        <% if (product.stock > 0) { %>
+        <form method="POST" action="/cart/add" class="add-cart-form">
+          <input type="hidden" name="productId" value="<%= product.id %>">
+          <label>Antall
+            <input type="number" name="quantity" value="1" min="1" max="<%= product.stock %>">
+          </label>
+          <button type="submit" class="btn-primary">Legg i handlekurv</button>
+        </form>
+        <% } else { %>
+          <p class="out-of-stock">Dette produktet er utsolgt.</p>
+        <% } %>
+      <% } else { %>
+        <p><a href="/login">Logg inn</a> for å bestille.</p>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('layout/footer') %>

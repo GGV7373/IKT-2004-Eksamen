@@ -17,8 +17,13 @@ function validateDatabaseConfig() {
     throw new Error(`Mangler miljoverdier: ${missingFields.join(', ')}`);
   }
 
-  if (process.env.DB_PASSWORD === 'sett_ditt_passord_her' || process.env.DB_PASSWORD === 'your_postgres_password') {
-    throw new Error('Fjern plassholderen i DB_PASSWORD i .env. Bruk det faktiske PostgreSQL-passordet ditt, eller la feltet være tomt hvis databasen din ikke bruker passord lokalt.');
+  if (
+    process.env.DB_PASSWORD === 'sett_ditt_passord_her' ||
+    process.env.DB_PASSWORD === 'your_postgres_password'
+  ) {
+    throw new Error(
+      'Fjern plassholderen i DB_PASSWORD i .env. Bruk det faktiske PostgreSQL-passordet ditt, eller la feltet være tomt hvis databasen din ikke bruker passord lokalt.'
+    );
   }
 }
 
@@ -28,10 +33,54 @@ async function testConnection() {
 
 async function initializeDatabase() {
   await pool.query(`
-    CREATE TABLE IF NOT EXISTS names (
-      id SERIAL PRIMARY KEY,
-      name TEXT NOT NULL,
-      created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    CREATE TABLE IF NOT EXISTS users (
+      id            SERIAL PRIMARY KEY,
+      email         VARCHAR(255) UNIQUE NOT NULL,
+      password_hash TEXT NOT NULL,
+      full_name     VARCHAR(255) NOT NULL,
+      created_at    TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    )
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS products (
+      id          SERIAL PRIMARY KEY,
+      name        VARCHAR(255) NOT NULL,
+      description TEXT,
+      price       NUMERIC(10,2) NOT NULL,
+      image_path  VARCHAR(255),
+      stock       INTEGER NOT NULL DEFAULT 0,
+      category    VARCHAR(50) NOT NULL
+                  CHECK (category IN ('musikere','blomster','kake','bordkort')),
+      created_at  TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    )
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS orders (
+      id          SERIAL PRIMARY KEY,
+      user_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      status      VARCHAR(50) NOT NULL DEFAULT 'pending',
+      total_price NUMERIC(10,2) NOT NULL DEFAULT 0,
+      created_at  TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    )
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS order_items (
+      id          SERIAL PRIMARY KEY,
+      order_id    INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+      product_id  INTEGER REFERENCES products(id) ON DELETE SET NULL,
+      quantity    INTEGER NOT NULL DEFAULT 1,
+      unit_price  NUMERIC(10,2) NOT NULL
+    )
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS admins (
+      id            SERIAL PRIMARY KEY,
+      username      VARCHAR(100) UNIQUE NOT NULL,
+      password_hash TEXT NOT NULL
     )
   `);
 }
@@ -43,6 +92,7 @@ function query(text, params) {
 module.exports = {
   initializeDatabase,
   query,
+  pool,
   testConnection,
   validateDatabaseConfig,
 };

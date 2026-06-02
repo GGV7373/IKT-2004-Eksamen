@@ -1,0 +1,22 @@
+<%- include('header') %>
+
+<h1>Dashboard</h1>
+<div class="dashboard-stats">
+  <div class="stat-card">
+    <h2><%= userCount %></h2>
+    <p>Brukere</p>
+    <a href="/admin/users">Se alle</a>
+  </div>
+  <div class="stat-card">
+    <h2><%= productCount %></h2>
+    <p>Produkter</p>
+    <a href="/admin/products">Se alle</a>
+  </div>
+  <div class="stat-card">
+    <h2><%= orderCount %></h2>
+    <p>Bestillinger</p>
+    <a href="/admin/orders">Se alle</a>
+  </div>
+</div>
+
+<%- include('footer') %>

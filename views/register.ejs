@@ -1,0 +1,15 @@
+<%- include('layout/header') %>
+
+<div class="auth-page">
+  <h1>Opprett konto</h1>
+  <% if (error) { %><p class="msg-error"><%= error %></p><% } %>
+  <form method="POST" action="/register" class="auth-form">
+    <label>Fullt navn<input type="text" name="full_name" required autofocus></label>
+    <label>E-post<input type="email" name="email" required></label>
+    <label>Passord<input type="password" name="password" required minlength="6"></label>
+    <button type="submit">Registrer deg</button>
+  </form>
+  <p>Har du allerede konto? <a href="/login">Logg inn</a></p>
+</div>
+
+<%- include('layout/footer') %>

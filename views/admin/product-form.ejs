@@ -1,0 +1,50 @@
+<%- include('header') %>
+
+<div class="admin-section">
+  <h1><%= product ? 'Rediger produkt' : 'Nytt produkt' %></h1>
+
+  <form method="POST" action="<%= action %>" enctype="multipart/form-data" class="product-form">
+    <label>Navn *
+      <input type="text" name="name" value="<%= product ? product.name : '' %>" required>
+    </label>
+
+    <label>Kategori *
+      <select name="category" required>
+        <% ['musikere','blomster','kake','bordkort'].forEach(c => { %>
+        <option value="<%= c %>" <%= (product && product.category === c) ? 'selected' : '' %>><%= c.charAt(0).toUpperCase() + c.slice(1) %></option>
+        <% }) %>
+      </select>
+    </label>
+
+    <label>Beskrivelse
+      <textarea name="description" rows="4"><%= product ? (product.description || '') : '' %></textarea>
+    </label>
+
+    <label>Pris (kr) *
+      <input type="number" name="price" step="0.01" min="0" value="<%= product ? product.price : '' %>" required>
+    </label>
+
+    <label>Lagerbeholdning
+      <input type="number" name="stock" min="0" value="<%= product ? product.stock : 0 %>">
+    </label>
+
+    <label>Produktbilde
+      <input type="file" name="image" accept="image/*">
+    </label>
+
+    <% if (product && product.image_path) { %>
+    <div class="current-image">
+      <p>Nåværende bilde:</p>
+      <img src="<%= product.image_path %>" alt="Nåværende bilde" class="thumb-large">
+      <p><small>Last opp en ny fil for å erstatte bildet.</small></p>
+    </div>
+    <% } %>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-primary"><%= product ? 'Lagre endringer' : 'Opprett produkt' %></button>
+      <a href="/admin/products" class="btn-secondary">Avbryt</a>
+    </div>
+  </form>
+</div>
+
+<%- include('footer') %>

@@ -1,0 +1,40 @@
+<%- include('layout/header') %>
+
+<div class="orders-page">
+  <h1>Mine bestillinger</h1>
+
+  <% if (success) { %>
+    <p class="msg-success">Bestillingen din er mottatt! Vi kontakter deg snart.</p>
+  <% } %>
+
+  <% if (orders.length === 0) { %>
+    <p class="empty">Du har ingen bestillinger ennå. <a href="/products">Se produkter</a>.</p>
+  <% } else { %>
+    <% orders.forEach(order => { %>
+    <div class="order-card">
+      <div class="order-header">
+        <span>Bestilling #<%= order.id %></span>
+        <span class="order-status status-<%= order.status %>"><%= order.status %></span>
+        <span><%= new Date(order.created_at).toLocaleDateString('no-NO') %></span>
+        <span><strong>kr <%= parseFloat(order.total_price).toFixed(2) %></strong></span>
+      </div>
+      <ul class="order-items">
+        <% order.items.forEach(item => { %>
+        <li><%= item.name || 'Slettet produkt' %> × <%= item.quantity %> — kr <%= parseFloat(item.unit_price).toFixed(2) %></li>
+        <% }) %>
+      </ul>
+    </div>
+    <% }) %>
+  <% } %>
+
+  <hr>
+  <div class="danger-zone">
+    <h2>Slett konto</h2>
+    <p>Dette vil slette kontoen din og alle tilknyttede bestillinger permanent.</p>
+    <form method="POST" action="/account/delete" onsubmit="return confirm('Er du sikker? Dette kan ikke angres.')">
+      <button type="submit" class="btn-danger">Slett min konto</button>
+    </form>
+  </div>
+</div>
+
+<%- include('layout/footer') %>

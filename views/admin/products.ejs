@@ -1,0 +1,42 @@
+<%- include('header') %>
+
+<div class="admin-section">
+  <div class="section-title-row">
+    <h1>Produkter</h1>
+    <a href="/admin/products/new" class="btn-primary">+ Nytt produkt</a>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr><th>Bilde</th><th>Navn</th><th>Kategori</th><th>Pris</th><th>Lager</th><th>Handlinger</th></tr>
+    </thead>
+    <tbody>
+      <% products.forEach(p => { %>
+      <tr>
+        <td>
+          <% if (p.image_path) { %>
+            <img src="<%= p.image_path %>" alt="" class="thumb">
+          <% } else { %>
+            —
+          <% } %>
+        </td>
+        <td><%= p.name %></td>
+        <td><%= p.category %></td>
+        <td>kr <%= parseFloat(p.price).toFixed(2) %></td>
+        <td><%= p.stock %></td>
+        <td class="actions">
+          <a href="/admin/products/<%= p.id %>/edit" class="btn-small">Rediger</a>
+          <form method="POST" action="/admin/products/<%= p.id %>/delete" style="display:inline" onsubmit="return confirm('Slette dette produktet?')">
+            <button type="submit" class="btn-danger-small">Slett</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+      <% if (products.length === 0) { %>
+      <tr><td colspan="6">Ingen produkter ennå. <a href="/admin/products/new">Legg til et produkt</a>.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('footer') %>

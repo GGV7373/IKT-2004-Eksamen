@@ -1,0 +1,40 @@
+<%- include('layout/header') %>
+
+<div class="cart-page">
+  <h1>Handlekurv</h1>
+
+  <% if (items.length === 0) { %>
+    <p class="empty">Handlekurven din er tom. <a href="/products">Se produkter</a>.</p>
+  <% } else { %>
+  <table class="cart-table">
+    <thead>
+      <tr><th>Produkt</th><th>Pris</th><th>Antall</th><th>Sum</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% items.forEach(item => { %>
+      <tr>
+        <td><%= item.name %></td>
+        <td>kr <%= item.price.toFixed(2) %></td>
+        <td><%= item.quantity %></td>
+        <td>kr <%= (item.price * item.quantity).toFixed(2) %></td>
+        <td>
+          <form method="POST" action="/cart/remove">
+            <input type="hidden" name="productId" value="<%= item.productId %>">
+            <button type="submit" class="btn-danger-small">Fjern</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+    <tfoot>
+      <tr><td colspan="3"><strong>Totalt</strong></td><td colspan="2"><strong>kr <%= total.toFixed(2) %></strong></td></tr>
+    </tfoot>
+  </table>
+  <div class="cart-actions">
+    <a href="/products" class="btn-secondary">Fortsett å handle</a>
+    <a href="/checkout" class="btn-primary">Gå til betaling</a>
+  </div>
+  <% } %>
+</div>
+
+<%- include('layout/footer') %>

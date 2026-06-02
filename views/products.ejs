@@ -1,0 +1,35 @@
+<%- include('layout/header') %>
+
+<div class="products-page">
+  <h1><%= title %></h1>
+
+  <div class="category-tabs">
+    <a href="/products" class="<%= !category ? 'active' : '' %>">Alle</a>
+    <% ['musikere','blomster','kake','bordkort'].forEach(c => { %>
+    <a href="/products?category=<%= c %>" class="<%= category === c ? 'active' : '' %>"><%= categoryLabels[c] %></a>
+    <% }) %>
+  </div>
+
+  <% if (products.length === 0) { %>
+    <p class="empty">Ingen produkter tilgjengelig i denne kategorien ennå.</p>
+  <% } else { %>
+  <div class="product-grid">
+    <% products.forEach(p => { %>
+    <a href="/products/<%= p.id %>" class="product-card">
+      <% if (p.image_path) { %>
+        <img src="<%= p.image_path %>" alt="<%= p.name %>">
+      <% } else { %>
+        <div class="no-image">Ingen bilde</div>
+      <% } %>
+      <div class="product-card-info">
+        <h3><%= p.name %></h3>
+        <p class="price">kr <%= parseFloat(p.price).toFixed(2) %></p>
+        <p class="stock"><%= p.stock > 0 ? `${p.stock} tilgjengelig` : 'Utsolgt' %></p>
+      </div>
+    </a>
+    <% }) %>
+  </div>
+  <% } %>
+</div>
+
+<%- include('layout/footer') %>
