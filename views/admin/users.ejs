@@ -4,7 +4,7 @@
   <h1>Brukere</h1>
   <table class="admin-table">
     <thead>
-      <tr><th>ID</th><th>Navn</th><th>E-post</th><th>Registrert</th></tr>
+      <tr><th>ID</th><th>Navn</th><th>E-post</th><th>Registrert</th><th></th></tr>
     </thead>
     <tbody>
       <% users.forEach(u => { %>
@@ -13,6 +13,12 @@
         <td><%= u.full_name %></td>
         <td><%= u.email %></td>
         <td><%= new Date(u.created_at).toLocaleDateString('no-NO') %></td>
+        <td>
+          <form action="/admin/users/<%= u.id %>/delete" method="POST"
+                onsubmit="return confirm('Slette <%= u.full_name %>?')">
+            <button type="submit" class="btn-danger-small">Slett</button>
+          </form>
+        </td>
       </tr>
       <% }) %>
       <% if (users.length === 0) { %>

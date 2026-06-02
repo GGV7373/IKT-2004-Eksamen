@@ -63,6 +63,15 @@ router.get('/users', requireAdmin, async (req, res, next) => {
   }
 });
 
+router.post('/users/:id/delete', requireAdmin, async (req, res, next) => {
+  try {
+    await query('DELETE FROM users WHERE id = $1', [req.params.id]);
+    res.redirect('/admin/users');
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/products', requireAdmin, async (req, res, next) => {
   try {
     const result = await query('SELECT * FROM products ORDER BY category, name');
