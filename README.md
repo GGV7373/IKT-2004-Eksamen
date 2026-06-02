@@ -4,6 +4,16 @@ Dette er eksamens oppgaven utvikilings for Victor
 # Bryllup-easy AS
 Bryllup-easy AS er en bedrift som driver på med brullupsplanlegging. De har en nettbasert tjeneste hvor kunder kan logge inn og velge tjenester for sitt brullup. 
 
+## Admin
+Tilgang til admin med passord er:
+
+Username: admin
+Password: admin123
+
+Det er tilgang på localhost:3000/admin
+
+Oppsett? Se [brukerveiledning.md](docs/brukerveiledning.md)
+
 ## PostgreSQL-oppsett
 
 1. Kopier verdiene fra `example.env` til `.env`.

@@ -11,3 +11,6 @@ Fikk Ai til og sette opp en PostgreSQL database for meg, og koblet den til Expre
 ## 2026-06-03 11:09
 Jeg fikk Claud til og lage en plan for hvordan lage denne nettsiden med database. Promt:
 I need two tings, a forntend for the user and a backend for the admin. THe admin can edit the inventory tho the store, add inventory change picher and descripson, and se who has users, the user can make a user, login adn order form the difrent categorys, musichans, flowers, cake and bordkort, and they can delite ther user too. Use docker-compse.yml for best usigage of this webside
+
+## 2026-06-04 11:44
+Jeg buntte mer mer finpussing av nettsiden. Jeg fikk AI til og lage den mer porforsjonel med bruk av bildene som jeg har lagt til. 
