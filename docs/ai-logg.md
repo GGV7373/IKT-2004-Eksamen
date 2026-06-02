@@ -7,3 +7,7 @@ Fikk AI til og sette opp en enkel Express server for meg, og fikk den til og kj�
 ## 2026-06-02 10:04
 
 Fikk Ai til og sette opp en PostgreSQL database for meg, og koblet den til Express serveren. Nå kan jeg lagre og hente data fra databasen ved hjelp av API-endepunkter. Jeg har også lagt til en enkel feilhåndtering for databaseoperasjoner, slik at jeg kan se eventuelle feil i konsollen.
+
+## 2026-06-03 11:09
+Jeg fikk Claud til og lage en plan for hvordan lage denne nettsiden med database. Promt:
+I need two tings, a forntend for the user and a backend for the admin. THe admin can edit the inventory tho the store, add inventory change picher and descripson, and se who has users, the user can make a user, login adn order form the difrent categorys, musichans, flowers, cake and bordkort, and they can delite ther user too. Use docker-compse.yml for best usigage of this webside

@@ -1,6 +1,9 @@
 # IKT-2004-Eksamen
 Dette er eksamens oppgaven utvikilings for Victor
 
+# Bryllup-easy AS
+Bryllup-easy AS er en bedrift som driver på med brullupsplanlegging. De har en nettbasert tjeneste hvor kunder kan logge inn og velge tjenester for sitt brullup. 
+
 ## PostgreSQL-oppsett
 
 1. Kopier verdiene fra `example.env` til `.env`.
