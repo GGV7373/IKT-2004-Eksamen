@@ -1,27 +1,56 @@
 <%- include('header') %>
 
 <div class="admin-section">
-  <h1>Bestillinger</h1>
+  <div class="section-title-row">
+    <h1>Bestillinger</h1>
+    <span style="color:#888;font-size:0.9rem"><%= orders.length %> bestilling<%= orders.length !== 1 ? 'er' : '' %></span>
+  </div>
+
+  <% if (orders.length === 0) { %>
+    <p class="empty">Ingen bestillinger ennå.</p>
+  <% } else { %>
   <table class="admin-table">
     <thead>
-      <tr><th>ID</th><th>Kunde</th><th>E-post</th><th>Total</th><th>Status</th><th>Dato</th></tr>
+      <tr>
+        <th>ID</th>
+        <th>Kunde</th>
+        <th>E-post</th>
+        <th>Produkter</th>
+        <th>Total</th>
+        <th>Dato</th>
+        <th>Status</th>
+      </tr>
     </thead>
     <tbody>
       <% orders.forEach(o => { %>
       <tr>
-        <td>#<%= o.id %></td>
+        <td><strong>#<%= o.id %></strong></td>
         <td><%= o.full_name %></td>
         <td><%= o.email %></td>
-        <td>kr <%= parseFloat(o.total_price).toFixed(2) %></td>
-        <td><span class="order-status status-<%= o.status %>"><%= o.status %></span></td>
+        <td>
+          <ul style="margin:0;padding-left:1rem;font-size:0.85rem;color:#555">
+            <% o.items.forEach(item => { %>
+            <li><%= item.quantity %>&times; <%= item.name %> <span style="color:#c9a84c">(kr <%= parseFloat(item.unit_price).toFixed(2) %>)</span></li>
+            <% }) %>
+          </ul>
+        </td>
+        <td><strong>kr <%= parseFloat(o.total_price).toFixed(2) %></strong></td>
         <td><%= new Date(o.created_at).toLocaleDateString('no-NO') %></td>
+        <td>
+          <form action="/admin/orders/<%= o.id %>/status" method="POST" style="display:flex;gap:0.4rem;align-items:center">
+            <select name="status" style="padding:0.3rem 0.5rem;border-radius:4px;border:1px solid #ccc;font-size:0.85rem">
+              <option value="pending"    <%= o.status === 'pending'    ? 'selected' : '' %>>Venter</option>
+              <option value="confirmed"  <%= o.status === 'confirmed'  ? 'selected' : '' %>>Bekreftet</option>
+              <option value="cancelled"  <%= o.status === 'cancelled'  ? 'selected' : '' %>>Kansellert</option>
+            </select>
+            <button type="submit" class="btn-small">Lagre</button>
+          </form>
+        </td>
       </tr>
       <% }) %>
-      <% if (orders.length === 0) { %>
-      <tr><td colspan="6">Ingen bestillinger ennå.</td></tr>
-      <% } %>
     </tbody>
   </table>
+  <% } %>
 </div>
 
 <%- include('footer') %>

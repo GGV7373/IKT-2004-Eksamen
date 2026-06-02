@@ -141,14 +141,36 @@ router.post('/products/:id/delete', requireAdmin, async (req, res, next) => {
 
 router.get('/orders', requireAdmin, async (req, res, next) => {
   try {
-    const result = await query(`
+    const ordersResult = await query(`
       SELECT o.id, o.status, o.total_price, o.created_at,
              u.full_name, u.email
       FROM orders o
       JOIN users u ON u.id = o.user_id
       ORDER BY o.created_at DESC
     `);
-    res.render('admin/orders', { title: 'Admin — Bestillinger', orders: result.rows });
+    const orders = ordersResult.rows;
+    for (const order of orders) {
+      const itemsResult = await query(`
+        SELECT p.name, oi.quantity, oi.unit_price
+        FROM order_items oi
+        JOIN products p ON p.id = oi.product_id
+        WHERE oi.order_id = $1
+      `, [order.id]);
+      order.items = itemsResult.rows;
+    }
+    res.render('admin/orders', { title: 'Admin — Bestillinger', orders });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/orders/:id/status', requireAdmin, async (req, res, next) => {
+  const validStatuses = ['pending', 'confirmed', 'cancelled'];
+  const { status } = req.body;
+  if (!validStatuses.includes(status)) return res.redirect('/admin/orders');
+  try {
+    await query('UPDATE orders SET status = $1 WHERE id = $2', [status, req.params.id]);
+    res.redirect('/admin/orders');
   } catch (err) {
     next(err);
   }

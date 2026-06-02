@@ -17,8 +17,7 @@ body {
   font-family: 'Georgia', serif;
   background: var(--light);
   color: var(--dark);
-  min-height: 100vh;
-  display: flex;
+  display: fixs;
   flex-direction: column;
 }
 
@@ -29,7 +28,7 @@ a:hover { text-decoration: underline; }
 .navbar {
   background: var(--dark);
   color: var(--white);
-  display: flex;
+  display: static;
   align-items: center;
   gap: 1.5rem;
   padding: 0.8rem 2rem;
@@ -79,7 +78,7 @@ a:hover { text-decoration: underline; }
 .admin-btn:hover { background: #333; }
 
 /* ── Main ── */
-main { flex: 1; padding: 2rem; max-width: 1100px; margin: 0 auto; width: 100%; }
+main { padding: 2rem; max-width: 1100px; margin: 0 auto; width: 100%; }
 
 /* ── Hero ── */
 .hero { text-align: center; padding: 4rem 1rem; }
