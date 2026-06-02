@@ -93,10 +93,11 @@ router.get('/products/new', requireAdmin, (req, res) => {
 router.post('/products/new', requireAdmin, upload.single('image'), async (req, res, next) => {
   const { name, category, description, price, stock } = req.body;
   const image_path = req.file ? '/uploads/' + req.file.filename : null;
+  const priceValue = parseFloat(String(price).replace(',', '.'));
   try {
     await query(
       'INSERT INTO products (name, category, description, price, stock, image_path) VALUES ($1,$2,$3,$4,$5,$6)',
-      [name, category, description, price, stock || 0, image_path]
+      [name, category, description, priceValue, stock || 0, image_path]
     );
     res.redirect('/admin/products');
   } catch (err) {
@@ -121,16 +122,17 @@ router.get('/products/:id/edit', requireAdmin, async (req, res, next) => {
 
 router.post('/products/:id/edit', requireAdmin, upload.single('image'), async (req, res, next) => {
   const { name, category, description, price, stock } = req.body;
+  const priceValue = parseFloat(String(price).replace(',', '.'));
   try {
     if (req.file) {
       await query(
         'UPDATE products SET name=$1, category=$2, description=$3, price=$4, stock=$5, image_path=$6 WHERE id=$7',
-        [name, category, description, price, stock || 0, '/uploads/' + req.file.filename, req.params.id]
+        [name, category, description, priceValue, stock || 0, '/uploads/' + req.file.filename, req.params.id]
       );
     } else {
       await query(
         'UPDATE products SET name=$1, category=$2, description=$3, price=$4, stock=$5 WHERE id=$6',
-        [name, category, description, price, stock || 0, req.params.id]
+        [name, category, description, priceValue, stock || 0, req.params.id]
       );
     }
     res.redirect('/admin/products');

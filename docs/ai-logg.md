@@ -23,3 +23,6 @@ Jeg får AI til og fikkse div feil i header og gjøre teksten enklere og lettere
 
 ## 2026-06-07 12:43
 Jeg får AI til og sørge for at nettsiden er opp til GTPR stander og at den ikke lagrer unødvendige data om brukeren, og at den har en tydelig personvernerklæring.
+
+## 2026-06-08 14:14
+Jeg fik AI til og fikse et server porblem som gjorde at jeg ikke kunne legge til egen varer på netsiden.
