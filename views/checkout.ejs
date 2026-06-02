@@ -1,0 +1,32 @@
+<%- include('layout/header') %>
+
+<div class="checkout-page">
+  <h1>Bekreft bestilling</h1>
+
+  <table class="cart-table">
+    <thead>
+      <tr><th>Produkt</th><th>Antall</th><th>Pris</th><th>Sum</th></tr>
+    </thead>
+    <tbody>
+      <% items.forEach(item => { %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.quantity %></td>
+        <td>kr <%= item.price.toFixed(2) %></td>
+        <td>kr <%= (item.price * item.quantity).toFixed(2) %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+    <tfoot>
+      <tr><td colspan="3"><strong>Totalt å betale</strong></td><td><strong>kr <%= total.toFixed(2) %></strong></td></tr>
+    </tfoot>
+  </table>
+
+  <form method="POST" action="/checkout" class="checkout-form">
+    <p>Bestillingen leveres til deg etter bekreftelse fra vårt team.</p>
+    <button type="submit" class="btn-primary">Bekreft bestilling</button>
+    <a href="/cart" class="btn-secondary">Tilbake til handlekurv</a>
+  </form>
+</div>
+
+<%- include('layout/footer') %>

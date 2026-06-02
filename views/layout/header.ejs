@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> — Bryllup-easy AS</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <a href="/" class="brand">💍 Bryllup-easy AS</a>
+  <div class="nav-links">
+    <a href="/products?category=musikere">Musikere</a>
+    <a href="/products?category=blomster">Blomster</a>
+    <a href="/products?category=kake">Kake</a>
+    <a href="/products?category=bordkort">Bordkort</a>
+  </div>
+  <div class="nav-auth">
+    <% if (user) { %>
+      <a href="/cart" class="cart-link">Handlekurv <% if (cartCount > 0) { %><span class="badge"><%= cartCount %></span><% } %></a>
+      <a href="/orders">Mine bestillinger</a>
+      <span class="nav-name">Hei, <%= user.full_name.split(' ')[0] %></span>
+      <a href="/logout" class="btn-small">Logg ut</a>
+    <% } else { %>
+      <a href="/login">Logg inn</a>
+      <a href="/register" class="btn-small">Registrer deg</a>
+    <% } %>
+    <% if (isAdmin) { %>
+      <a href="/admin" class="btn-small admin-btn">Admin</a>
+    <% } %>
+  </div>
+</nav>
+<main>
