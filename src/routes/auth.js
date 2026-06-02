@@ -10,9 +10,12 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', async (req, res, next) => {
-  const { full_name, email, password } = req.body;
+  const { full_name, email, password, gdpr_consent } = req.body;
   if (!full_name || !email || !password) {
     return res.render('register', { title: 'Registrer deg', error: 'Alle felt må fylles ut.' });
+  }
+  if (!gdpr_consent) {
+    return res.render('register', { title: 'Registrer deg', error: 'Du må godta personvernerklæringen for å registrere deg.' });
   }
   try {
     const existing = await query('SELECT id FROM users WHERE email = $1', [email]);
@@ -21,7 +24,7 @@ router.post('/register', async (req, res, next) => {
     }
     const password_hash = await bcrypt.hash(password, 12);
     await query(
-      'INSERT INTO users (email, password_hash, full_name) VALUES ($1, $2, $3)',
+      'INSERT INTO users (email, password_hash, full_name, gdpr_consent, gdpr_consent_at) VALUES ($1, $2, $3, true, NOW())',
       [email, password_hash, full_name]
     );
     res.redirect('/login?msg=registered');

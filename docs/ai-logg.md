@@ -20,3 +20,6 @@ Jeg får AI til og kunne slete bruker fra admin panelet, og jeg har lagt til en 
 
 ## 2026-06-06 12:35
 Jeg får AI til og fikkse div feil i header og gjøre teksten enklere og lettere å lese.
+
+## 2026-06-07 12:43
+Jeg får AI til og sørge for at nettsiden er opp til GTPR stander og at den ikke lagrer unødvendige data om brukeren, og at den har en tydelig personvernerklæring.

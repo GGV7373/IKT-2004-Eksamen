@@ -7,6 +7,10 @@
     <label>Fullt navn<input type="text" name="full_name" required autofocus></label>
     <label>E-post<input type="email" name="email" required></label>
     <label>Passord<input type="password" name="password" required minlength="6"></label>
+    <label class="checkbox-label">
+      <input type="checkbox" name="gdpr_consent" value="1" required>
+      Jeg har lest og godtar <a href="/personvern" target="_blank">personvernerklæringen</a>
+    </label>
     <button type="submit">Registrer deg</button>
   </form>
   <p>Har du allerede konto? <a href="/login">Logg inn</a></p>

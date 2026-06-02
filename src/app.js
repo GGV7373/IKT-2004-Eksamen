@@ -5,6 +5,7 @@ const session = require('express-session');
 const authRouter = require('./routes/auth');
 const shopRouter = require('./routes/shop');
 const adminRouter = require('./routes/admin');
+const gdprRouter = require('./routes/gdpr');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use('/js', express.static(path.join(__dirname, '..', 'public', 'js')));
 
 app.use('/', authRouter);
 app.use('/', shopRouter);
+app.use('/', gdprRouter);
 app.use('/admin', adminRouter);
 
 app.use((req, res) => {

@@ -83,6 +83,12 @@ async function initializeDatabase() {
       password_hash TEXT NOT NULL
     )
   `);
+
+  await pool.query(`
+    ALTER TABLE users
+      ADD COLUMN IF NOT EXISTS gdpr_consent    BOOLEAN                  NOT NULL DEFAULT false,
+      ADD COLUMN IF NOT EXISTS gdpr_consent_at TIMESTAMP WITH TIME ZONE
+  `);
 }
 
 function query(text, params) {
