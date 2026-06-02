@@ -1,6 +1,6 @@
-const heiKnapp = document.getElementById('hei-knapp');
 const melding = document.getElementById('melding');
+const nameInput = document.getElementById('name');
 
-heiKnapp.addEventListener('click', () => {
-  melding.textContent = 'Hei';
-});
+if (nameInput && melding && melding.textContent) {
+  nameInput.focus();
+}
